@@ -85,7 +85,7 @@ function createControls(movie, user, likes, ownLike) {
     return controls.join('');
 }
 
-async function getMovie(id) {
+export async function getMovie(id) {
     const response = await fetch(`${baseUrl}/movies/${id}`);
     const movie = await response.json();
 
@@ -144,5 +144,7 @@ async function deleteMovie(id) {
 }
 
 async function editMovie(movieId) {
- showView(document.querySelector('#edit-movie'))
+ showView(document.querySelector('#edit-movie'));
+ editPage(movieId);
+ console.log(movieId);
 }

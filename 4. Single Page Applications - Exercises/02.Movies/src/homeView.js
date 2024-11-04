@@ -10,7 +10,6 @@ catalog.addEventListener('click', (e) => {
     if(e.target.tagName === 'BUTTON') {
         e.preventDefault();
         const id = e.target.dataset.id;
-        console.log(id);
         detailsPage(id);
     }
 })
@@ -52,19 +51,3 @@ function createMovieCard(movie) {
 
     return element;
 }
-
-/**
- * <li class="card mb-4">
-                                <img class="card-img-top"
-                                    src="https://miro.medium.com/max/735/1*akkAa2CcbKqHsvqVusF3-w.jpeg"
-                                    alt="Card image cap" width="400" />
-                                <div class="card-body">
-                                    <h4 class="card-title">Movie Title</h4>
-                                    <a href="#">
-                                    </a>
-                                </div>
-                                <div class="card-footer">
-                                    <button type="button" class="btn btn-info">Details</button>
-                                </div>
-                            </li>
- */
