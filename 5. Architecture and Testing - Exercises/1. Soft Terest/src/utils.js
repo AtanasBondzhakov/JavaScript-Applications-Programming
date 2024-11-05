@@ -1,8 +1,8 @@
 const sections = [...document.querySelectorAll('div[data-section]')];
 
-function hideAll() {
-    sections.forEach(section => section.style.display = 'none');
-}
+// function hideAll() {
+//     sections.forEach(section => section.style.display = 'none');
+// }
 
 export function showView(section) {
     document.querySelector('main').replaceChildren(section);
