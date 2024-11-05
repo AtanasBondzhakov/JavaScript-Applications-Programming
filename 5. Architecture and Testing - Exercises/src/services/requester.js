@@ -20,7 +20,7 @@ async function requester(method, url, data) {
         const response = await fetch(url, option);
         if (!response.ok) {
             if (response.status === 403) {
-                // userUtils.clear();
+                userUtils.clear();
             }
             const error = await response.json();
             throw new Error(error.message);
