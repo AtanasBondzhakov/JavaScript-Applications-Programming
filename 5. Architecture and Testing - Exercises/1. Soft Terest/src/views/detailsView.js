@@ -2,6 +2,7 @@ import { deleteIdea, getIdea } from "../services/dataServices.js";
 import { getUser, hasOwner } from "../services/userUtils.js";
 import { showView } from "../util.js";
 
+
 const detailsSection = document.querySelector('div[data-section="details"]');
 
 let context = null;
