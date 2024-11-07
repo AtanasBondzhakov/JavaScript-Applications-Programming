@@ -10,3 +10,5 @@ export const getAllTattoo = async () => await api.get(endpoint.getAll);
 export const createTattoo = async (data) => await api.post(endpoint.tattoos, data);
 
 export const getTattooById = async (id) => await api.get(`${endpoint.tattoos}/${id}`);
+
+export const editTattoo = async (id, data) => await api.put(`${endpoint.tattoos}/${id}`, data);

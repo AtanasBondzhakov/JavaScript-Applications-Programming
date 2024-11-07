@@ -24,7 +24,7 @@ const detailsTemplate = (tattoo, hasOwner, hasUser) => html`
                 ${hasUser ? html`
                 <div id="action-buttons">
                     ${hasOwner ? html`
-                                <a href="#" id="edit-btn">Edit</a>
+                                <a href="/edit/${tattoo._id}" id="edit-btn">Edit</a>
                                 <a href="#" id="delete-btn">Delete</a>`
                                : html `<a href="#" id="like-btn">Like</a>`
                     }
