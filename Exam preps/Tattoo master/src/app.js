@@ -9,6 +9,7 @@ import { renderLogin } from './views/loginView.js';
 import { renderRegister } from './views/registerView.js';
 import { onLogout } from './services/userServices.js';
 import { renderDashboard } from './views/dashboardView.js';
+import { renderCreate } from './views/createView.js';
 
 page(authMiddleware);
 page(navigationMiddleware);
@@ -19,5 +20,6 @@ page('/login', renderLogin);
 page('/register', renderRegister);
 page('/logout', onLogout);
 page('/dashboard', renderDashboard);
+page('/create', renderCreate);
 
 page.start();
