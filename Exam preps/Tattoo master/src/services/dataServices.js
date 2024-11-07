@@ -1,4 +1,4 @@
-import * as api from '../services/api.js';
+import * as api from './api.js';
 
 const endpoint = {
     getAll: '/data/tattoos?sortBy=_createdOn%20desc',

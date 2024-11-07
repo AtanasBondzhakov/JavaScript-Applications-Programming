@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "../../node_modules/lit-html/lit-html.js";
 import { editTattoo, getTattooById } from "../services/dataServices.js";
 
 const editTemplate = (onSubmitClick, tattoo) => html`
