@@ -25,7 +25,7 @@ const detailsTemplate = (tattoo, hasOwner, hasUser) => html`
                 <div id="action-buttons">
                     ${hasOwner ? html`
                                 <a href="/edit/${tattoo._id}" id="edit-btn">Edit</a>
-                                <a href="#" id="delete-btn">Delete</a>`
+                                <a href="#" @click=${onDelete} id="delete-btn">Delete</a>`
                                : html `<a href="#" id="like-btn">Like</a>`
                     }
                 
@@ -47,4 +47,11 @@ export const renderDetails = async (ctx) => {
     debugger
 
     ctx.render(detailsTemplate(tattoo, hasOwner(userId, ownerId), hasUser));
+}
+
+const onDelete = async () => {
+    if (confirm('Are you sure delete it?')) {
+        await deleteTattoo(tattooId);
+        context.page.redirect('/dashboard');
+    }
 }

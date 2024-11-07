@@ -11,7 +11,7 @@ import { onLogout } from './services/userServices.js';
 import { renderDashboard } from './views/dashboardView.js';
 import { renderCreate } from './views/createView.js';
 import { renderDetails } from './views/detailsView.js';
-import { renderEdit } from './views/edti.js';
+import { renderEdit } from './views/editView.js';
 
 page(authMiddleware);
 page(navigationMiddleware);
