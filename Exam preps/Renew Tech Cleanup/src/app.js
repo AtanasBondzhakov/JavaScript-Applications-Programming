@@ -8,6 +8,7 @@ import { onLogout } from './services/userServices.js';
 import { renderCreate } from './views/createView.js';
 import { renderDashboard } from './views/dashboardView.js';
 import { renderDetails } from './views/detailsView.js';
+import { renderEdit } from './views/editView.js';
 import { renderHome } from './views/homeView.js';
 import { renderLogin } from './views/loginView.js';
 import { renderRegister } from './views/registerView.js';
@@ -23,5 +24,6 @@ page('/logout', onLogout);
 page('/dashboard', renderDashboard);
 page('/create', renderCreate);
 page('/details/:id', renderDetails);
+page('/edit/:id', renderEdit);
 
 page.start();
