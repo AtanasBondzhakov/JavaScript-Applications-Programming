@@ -31,5 +31,5 @@ const solutionTemplate = (solution) => html`
 export const renderDashboard = async (ctx) => {
     const solutions = await getAllSolutions();
 
-    ctx.render(dashboardTemplate([]));
+    ctx.render(dashboardTemplate(solutions));
 }
