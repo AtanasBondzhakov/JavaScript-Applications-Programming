@@ -27,3 +27,5 @@ const guestNavTemplate = () => html`
   <a href="/register">Register</a>
 </div>
 `;
+
+export const renderNavigation = ({user}) => navigationTemplate(user);
