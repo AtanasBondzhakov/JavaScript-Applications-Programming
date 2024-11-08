@@ -23,7 +23,7 @@ const solutionTemplate = (solution) => html`
             <p class="description">
             ${solution.description}
             </p>
-            <a class="details-btn" href="#">Learn More</a>
+            <a class="details-btn" href="/details/${solution._id}">Learn More</a>
         </div>
     </div>
 `;

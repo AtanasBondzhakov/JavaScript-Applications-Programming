@@ -8,3 +8,5 @@ const endpoint = {
 export const getAllSolutions = async () => await api.get(endpoint.getAll);
 
 export const createSolution = async (data) => await api.post(`${endpoint.solutions}`, data);
+
+export const getSolutionById = async (id) => await api.get(`${endpoint.solutions}/${id}`);
