@@ -6,8 +6,8 @@ const navigationTemplate = (user) => html`
         </a>
         <nav>
           <div>
-            <a href="#">TV Shows</a>
-            <a href="#">Search</a>
+            <a href="/dashboard">TV Shows</a>
+            <a href="/search">Search</a>
           </div>
             ${user ? userNavTemplate() : guestNavTemplate()}
         </nav>
