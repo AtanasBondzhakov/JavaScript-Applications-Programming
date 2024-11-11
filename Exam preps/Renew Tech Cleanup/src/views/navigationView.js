@@ -8,9 +8,7 @@ const navigationTemplate = (user) => html`
           <div>
             <a href="/dashboard">Solutions</a>
           </div>
-
           ${user ? userNavTemplate() : guestNavTemplate()}
-
         </nav>
 `;
 
