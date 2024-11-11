@@ -10,6 +10,8 @@ import { renderRegister } from './views/registerView.js';
 import { onLogout } from './services/userServices.js';
 import { renderDashboard } from './views/dashboardView.js';
 import { renderCreate } from './views/createView.js';
+import { renderDetails } from './views/detailsView.js';
+import { renderEdit } from './views/editView.js';
 
 page(authMiddleware);
 page(navigationMiddleware);
@@ -21,5 +23,7 @@ page('/register', renderRegister);
 page('/logout', onLogout);
 page('/dashboard', renderDashboard);
 page('/create', renderCreate);
+page('/details/:id', renderDetails);
+page('/edit/:id', renderEdit);
 
 page.start();
