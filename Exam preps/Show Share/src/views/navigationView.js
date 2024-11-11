@@ -1,7 +1,7 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
 const navigationTemplate = (user) => html`
-       <a id="logo" href="#"
+       <a id="logo" href="/"
           ><img id="logo-img" src="./images/show_logo.png" alt="logo" />
         </a>
         <nav>
@@ -15,15 +15,15 @@ const navigationTemplate = (user) => html`
 
 const userNavTemplate = () => html`
     <div class="user">
-      <a href="#">Add Show</a>
-      <a href="#">Logout</a>
+      <a href="/create">Add Show</a>
+      <a href="/logout">Logout</a>
     </div>
 `;
 
 const guestNavTemplate = () => html`
     <div class="guest">
-      <a href="#">Login</a>
-      <a href="#">Register</a>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
     </div>
 `;
 
