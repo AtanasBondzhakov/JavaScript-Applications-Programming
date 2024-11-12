@@ -1,6 +1,6 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
-import { getShowById } from '../services/dataServices.js';
+import { deleteShow, getShowById } from '../services/dataServices.js';
 import { getUserData, hasOwner } from '../utils.js';
 
 const detailsTemplate = (show, hasUser, isOwner) => html`
@@ -21,7 +21,7 @@ const detailsTemplate = (show, hasUser, isOwner) => html`
               <div id="action-buttons">
                 ${isOwner ? html`
                 <a href="/edit/${show._id}" id="edit-btn">Edit</a>
-                <a href="#" id="delete-btn">Delete</a>
+                <a href="#" @click=${onDelete} id="delete-btn">Delete</a>
                 ` : null}
               </div>
               ` : null}
@@ -31,16 +31,29 @@ const detailsTemplate = (show, hasUser, isOwner) => html`
         </section>
 `;
 
+let showId;
+let context;
+
 export const renderDetails = async (ctx) => {
-    const showId = ctx.params.id;
-    const userId = ctx.user?._id;
+  context = ctx;
 
-    const show = await getShowById(showId);
+  showId = ctx.params.id;
+  const userId = ctx.user?._id;
 
-    const ownerId = show._ownerId;
+  const show = await getShowById(showId);
 
-    const hasUser = !!getUserData();
-    const isOwner = hasOwner(userId, ownerId);
+  const ownerId = show._ownerId;
 
-    ctx.render(detailsTemplate(show, hasUser, isOwner));
+  const hasUser = !!getUserData();
+  const isOwner = hasOwner(userId, ownerId);
+
+  ctx.render(detailsTemplate(show, hasUser, isOwner));
+}
+
+async function onDelete(e) {
+
+  if (confirm('Are you sure delete it?')) {
+    await deleteShow(showId);
+    context.page.redirect('/dashboard');
+  }
 }

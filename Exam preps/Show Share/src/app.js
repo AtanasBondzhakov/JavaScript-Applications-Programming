@@ -12,6 +12,7 @@ import { renderDashboard } from './views/dashboardView.js';
 import { renderCreate } from './views/createView.js';
 import { renderDetails } from './views/detailsView.js';
 import { renderEdit } from './views/editView.js';
+import { renderSearch } from './views/searchView.js';
 
 page(authMiddleware);
 page(navigationMiddleware);
@@ -25,5 +26,6 @@ page('/dashboard', renderDashboard);
 page('/create', renderCreate);
 page('/details/:id', renderDetails);
 page('/edit/:id', renderEdit);
+page('/search', renderSearch);
 
 page.start();
