@@ -1,0 +1,22 @@
+{
+  "name": "5.-table-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "solution.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "lit-html": "^3.2.1"
+  }
+}
