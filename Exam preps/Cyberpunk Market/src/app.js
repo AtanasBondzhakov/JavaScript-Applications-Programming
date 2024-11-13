@@ -3,6 +3,9 @@ import page from '../node_modules/page/page.mjs';
 import { authMiddleware } from './middlewares/authMiddleware.js';
 import { navigationMiddleware } from './middlewares/navigationMiddleware.js';
 import { renderMiddleware } from './middlewares/renderMIddleware.js';
+import { onLogout } from './services/userServices.js';
+import { renderCreate } from './views/createView.js';
+import { renderDashboard } from './views/dashboardView.js';
 
 import { renderHome } from './views/homeView.js';
 import { renderLogin } from './views/loginView.js';
@@ -15,5 +18,8 @@ page(renderMiddleware);
 page('/', renderHome);
 page('/login', renderLogin);
 page('/register', renderRegister);
+page('/logout', onLogout);
+page('/dashboard', renderDashboard);
+page('/create', renderCreate);
 
 page();

@@ -44,7 +44,7 @@ export const renderRegister = (ctx) => {
         }
 
         if(password !== rePass) {
-            return alert('Passwords do not match');
+            return alert('Passwords don\'t match');
         }
 
         await register({email, password});
