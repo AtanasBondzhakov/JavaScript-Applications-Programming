@@ -46,12 +46,10 @@ export const renderDetails = async (ctx) => {
 
     const userId = ctx.user?._id;
     const item = await getItemById(itemId);
-
     const hasUser = !!getUserData();
     const ownerId = item._ownerId;
-
+    
     const isOwner = hasOwner(userId, ownerId)
-
 
     ctx.render(detailsTemplate(item, hasUser, isOwner));
 }

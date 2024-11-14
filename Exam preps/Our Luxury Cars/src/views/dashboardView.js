@@ -23,7 +23,7 @@ const carTemplate = (car) => html`
             <p class="weight">Weight: ${car.weight} kg</p>
             <p class="top-speed">Top Speed: ${car.speed} kph</p>
         </div>
-        <a class="details-btn" href="#">More Info</a>
+        <a class="details-btn" href="/details/${car._id}">More Info</a>
     </div>
 `;
 
