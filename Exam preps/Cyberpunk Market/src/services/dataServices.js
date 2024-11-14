@@ -8,3 +8,9 @@ const endpoints = {
 export const getAllItems = async () => await api.get(endpoints.getAll);
 
 export const createItem = async (data) => await api.post(endpoints.items, data);
+
+export const getItemById = async (id) => await api.get(`${endpoints.items}/${id}`);
+
+export const editItem = async (id, data) => await api.put(`${endpoints.items}/${id}`, data);
+
+export const deleteItem = async (id) => await api.del(`${endpoints.items}/${id}`);

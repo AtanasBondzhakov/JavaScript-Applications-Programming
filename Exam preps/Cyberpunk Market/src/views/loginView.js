@@ -1,6 +1,7 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
 import { login } from '../services/userServices.js';
+import { notify } from '../notify.js'
 
 const loginTemplate = (onSubmit) => html`
     <section id="login">
@@ -31,7 +32,7 @@ export const renderLogin = (ctx) => {
         const { email, password } = Object.fromEntries(formData);
 
         if (!email || !password) {
-            return alert('All fields are required');
+            return notify('All fields are required');
         }
 
         await login({ email, password });

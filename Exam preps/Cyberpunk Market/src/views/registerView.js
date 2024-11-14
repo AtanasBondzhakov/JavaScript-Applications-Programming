@@ -1,6 +1,7 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
 import { register } from '../services/userServices.js';
+import { notify } from '../notify.js';
 
 const registerTemplate = (onSubmit) => html`
     <section id="register">
@@ -33,23 +34,23 @@ const registerTemplate = (onSubmit) => html`
 `;
 
 export const renderRegister = (ctx) => {
-    const onSubmit = async (e) => {
-        e.preventDefault();
+  const onSubmit = async (e) => {
+    e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const {email, password, 're-password': rePass} = Object.fromEntries(formData);
-        
-        if(!email || !password || !rePass) {
-            return alert('All fields are required');
-        }
+    const formData = new FormData(e.currentTarget);
+    const { email, password, 're-password': rePass } = Object.fromEntries(formData);
 
-        if(password !== rePass) {
-            return alert('Passwords don\'t match');
-        }
-
-        await register({email, password});
-        ctx.page.redirect('/');
+    if (!email || !password || !rePass) {
+      return notify('All fields are required');
     }
 
-    ctx.render(registerTemplate(onSubmit));
+    if (password !== rePass) {
+      return notify('Passwords don\'t match');
+    }
+
+    await register({ email, password });
+    ctx.page.redirect('/');
+  }
+
+  ctx.render(registerTemplate(onSubmit));
 }

@@ -1,52 +1,60 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
-import { createItem } from '../services/dataServices.js';
+import { editItem, getItemById } from '../services/dataServices.js';
 import { notify } from '../notify.js';
 
-const createTemplate = (onSubmit) => html`
-    <section id="create">
-      <div class="form form-item">
-        <h2>Share Your item</h2>
-        <form @submit=${onSubmit} class="create-form">
-          <input type="text" name="item" id="item" placeholder="Item" />
-          <input
+const editTemplate = (item, onSubmit) => html`
+    <section id="edit">
+        <div class="form form-item">
+        <h2>Edit Your Item</h2>
+        <form @submit=${onSubmit} class="edit-form">
+            <input type="text" name="item" id="item" placeholder="Item" .value=${item.item} />
+            <input
             type="text"
             name="imageUrl"
             id="item-image"
             placeholder="Your item Image URL"
-          />
-          <input
+            .value=${item.imageUrl}
+            />
+            <input
             type="text"
             name="price"
             id="price"
             placeholder="Price in Euro"
-          />
-          <input
+            .value=${item.price}
+            />
+            <input
             type="text"
             name="availability"
             id="availability"
             placeholder="Availability Information"
-          />
-          <input
+            .value=${item.availability}
+            />
+            <input
             type="text"
             name="type"
             id="type"
             placeholder="Item Type"
-          />
-          <textarea
+            .value=${item.type}
+            />
+            <textarea
             id="description"
             name="description"
             placeholder="More About The Item"
             rows="10"
             cols="50"
-          ></textarea>
-          <button type="submit">Add</button>
+            .value=${item.description}
+            ></textarea>
+            <button type="submit">Edit</button>
         </form>
-      </div>
+        </div>
     </section>
 `;
 
-export const renderCreate = (ctx) => {
+export const renderEdit = async (ctx) => {
+    const itemId = ctx.params.id;
+    const item = await getItemById(itemId);
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -57,9 +65,10 @@ export const renderCreate = (ctx) => {
             return notify('All fields are required');
         }
 
-        await createItem({ item, imageUrl, price, availability, type, description });
-        ctx.page.redirect('/dashboard');
+        await editItem(itemId, { item, imageUrl, price, availability, type, description });
+        ctx.page.redirect(`/details/${itemId}`);
+
     }
 
-    ctx.render(createTemplate(onSubmit));
+    ctx.render(editTemplate(item, onSubmit));
 }
