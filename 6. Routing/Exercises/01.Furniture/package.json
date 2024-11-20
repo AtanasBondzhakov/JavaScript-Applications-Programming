@@ -1,0 +1,27 @@
+{
+  "name": "01.furniture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests",
+    "dev": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "lite-server": "^2.6.1",
+    "mocha": "^10.8.2",
+    "playwright-chromium": "^1.48.2"
+  },
+  "dependencies": {
+    "lit-html": "^3.2.1",
+    "page": "^1.11.6"
+  }
+}
