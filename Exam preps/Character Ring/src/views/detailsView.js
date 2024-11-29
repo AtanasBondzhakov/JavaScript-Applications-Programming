@@ -1,9 +1,10 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 
 import { deleteCharacter, getCharacterById } from '../services/dataServices.js';
+import { getTotalLikes, isLiked, like } from '../services/likes.js';
 import { getUserData, hasOwner } from '../utils.js';
 
-const detailsTemplate = (character, hasUser, isOwner) => html`
+const detailsTemplate = (character, onLike, hasUser, isOwner, likes, hasLike) => html`
         <section id="details">
             <div id="details-wrapper">
                 <img id="details-img" src=${character.imageUrl} alt="example1" />
@@ -19,19 +20,23 @@ const detailsTemplate = (character, hasUser, isOwner) => html`
                             </p>
                 </div>
                 </div>
-                <h3>Is This Useful:<span id="likes">0</span></h3>
+                <h3>Is This Useful:<span id="likes">${likes}</span></h3>
                     ${hasUser
                         ? html`
                             <div id="action-buttons">
-                                ${isOwner 
+                                ${isOwner
                                     ? html`
                                         <a href="/edit/${character._id}" id="edit-btn">Edit</a>
                                         <a href="" @click=${onDelete} id="delete-btn">Delete</a>`
                                     : html`
-                                        <a href="" id="like-btn">Like</a>`
+                                        ${!hasLike
+                                            ? html`
+                                                <a href="" @click=${onLike} id="like-btn">Like</a>`
+                                            : null
+                                        }`
                                 }
                             </div>`
-                        : null
+                         : null
                     }
                 </div>
             </div>
@@ -53,7 +58,15 @@ export const renderDetails = async (ctx) => {
     const hasUser = !!getUserData();
     const isOwner = hasOwner(userId, ownerId);
 
-    ctx.render(detailsTemplate(character, hasUser, isOwner));
+    const likes = await getTotalLikes(characterId);
+
+    const hasLike = await isLiked(characterId, userId);
+
+    ctx.render(detailsTemplate(character, onLike, hasUser, isOwner, likes, hasLike));
+
+    async function onLike() {
+        await like({ characterId });
+    }
 }
 
 async function onDelete() {
