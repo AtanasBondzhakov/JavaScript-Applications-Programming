@@ -1,4 +1,4 @@
-import { get, post, put } from "./api.js";
+import { del, get, post, put } from "./api.js";
 
 const endpoints = {
     getAll: '/data/facts?sortBy=_createdOn%20desc',
@@ -12,3 +12,5 @@ export const getAllFacts = async () => await get(endpoints.getAll);
  export const getFact = async (id) => await get(`${endpoints.facts}/${id}`);
 
  export const editFact = async (id, data) => await put(`${endpoints.facts}/${id}`, data);
+
+ export const deleteFact = async (id) => await del(`${endpoints.facts}/${id}`);

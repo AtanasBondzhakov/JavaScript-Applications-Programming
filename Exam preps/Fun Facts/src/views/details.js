@@ -1,9 +1,10 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 
-import { getFact } from "../services/data.js";
+import { deleteFact, getFact } from "../services/data.js";
+import { getTotalLikes, isLiked, like } from "../services/likes.js";
 import { getUserData, hasOwner } from "../utils.js";
 
-const detailsTemplate = (fact, hasUser, isCreator) => html`
+const detailsTemplate = (fact, hasUser, isCreator, onLike, likes, hasLiked) => html`
     <section id="details">
         <div id="details-wrapper">
             <img id="details-img" src=${fact.imageUrl} alt="example1" />
@@ -18,17 +19,21 @@ const detailsTemplate = (fact, hasUser, isCreator) => html`
                             </p>
                 </div>
 
-                <h3>Likes:<span id="likes">0</span></h3>
+                <h3>Likes:<span id="likes">${likes}</span></h3>
 
                     ${hasUser
                         ? html`
                             <div id="action-buttons">
-                                ${isCreator 
+                                ${isCreator
                                     ? html`
                                         <a href="/edit/${fact._id}" id="edit-btn">Edit</a>
-                                        <a href="" id="delete-btn">Delete</a>`
+                                        <a href="" @click=${onDelete} id="delete-btn">Delete</a>`
                                     : html`
-                                        <a href="" id="like-btn">Like</a>`
+                                        ${!hasLiked 
+                                            ? html`
+                                                <a href=""  @click=${onLike} id="like-btn">Like</a>`
+                                            : null
+                                        }`
                                 }
                             </div>`
                         : null
@@ -38,8 +43,13 @@ const detailsTemplate = (fact, hasUser, isCreator) => html`
     </section>
 `;
 
+let context = null;
+let factId = null;
+
 export const renderDetails = async (ctx) => {
-    const factId = ctx.params.id;
+    factId = ctx.params.id;
+    context = ctx;
+
     const userId = ctx.user?._id;
 
     const fact = await getFact(factId);
@@ -49,6 +59,20 @@ export const renderDetails = async (ctx) => {
     const hasUser = !!getUserData();
     const isCreator = hasOwner(userId, ownerId);
 
+    const likes = await getTotalLikes(factId);
+    const hasLiked = await isLiked(factId, userId);
 
-    ctx.render(detailsTemplate(fact, hasUser, isCreator));
+
+    ctx.render(detailsTemplate(fact, hasUser, isCreator, onLike, likes, hasLiked));
+
+    async function onLike() {
+        await like(factId);
+    }
+}
+
+const onDelete = async () => {
+    if (confirm('Are you sure you want to delete this fact?')) {
+        await deleteFact(factId);
+        context.page.redirect('/dashboard');
+    }
 }
